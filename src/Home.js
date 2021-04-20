@@ -1,16 +1,22 @@
 import './Home.css';
-
+import { Link } from "react-router-dom";
 
 
 function Home() {
     return (
       <div className='main-container'>
-          <h1>HOME</h1>
+          <h1>TIMED</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
           <div className='nav-links'>
-              <button>Button 1</button>
-              <button>Button 2</button>
-              <button>Button 3</button>
+              <Link to='/countdown'>
+              <button>Countdown</button>
+              </Link>
+              <Link to='/animedoro'>
+              <button>Animedoro</button>
+              </Link>
+              <Link to='/stopwatch'>
+              <button>Stopwatch</button>
+              </Link>
           </div>
       </div>
     );
