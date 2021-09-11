@@ -1,0 +1,78 @@
+.Countdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+ }
+
+ .Countdown-main { 
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     border-radius: 1cm black solid;
+}  
+
+.Countdown-container h1 { 
+    font-size: 30px;
+}
+
+.Countdown-container p { 
+    font-size: 15px;
+    text-align: center;
+}
+
+
+.btns { 
+    width: 100px; 
+    height:25px; 
+    margin: 5px; 
+    border: none; 
+    border-radius: 5px;
+    color:white;  
+    cursor: pointer; 
+}
+
+.btn {
+    width: 100px; 
+    height:25px; 
+    margin: 5px; 
+    border: none; 
+    background-color: #4361ee;
+    border-radius: 5px;
+    color:white;  
+    cursor: pointer;   
+}
+
+.Countdown-main h3 { 
+    font-size: 25px;
+}
+
+.burger {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 300px) { 
+    .Countdown-container-main h1 { 
+        font-size: 50px;
+    }
+    .Countdown-container p { 
+        font-size: 25px;
+    }
+    .Countdown-main h3 { 
+        font-size: 25px;
+    }
+}
+
+@media screen and (min-width: 500px) { 
+    .Countdown-container h1 { 
+        font-size: 60px;
+    }
+    .Countdown-container p { 
+        font-size: 25px;
+    }
+    .Countdown-main h3 { 
+        font-size: 45px;
+    }
+}
