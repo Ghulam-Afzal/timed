@@ -56,6 +56,7 @@ function Countdown() {
   };
 
   const formData = (event) => {
+    event.preventDefault()
     const secs = event.target.seconds.value;
     const minutes = event.target.minutes.value;
     event.target.minutes.value = "";

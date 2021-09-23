@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { createTask, initializeTasks } from "./taskReducer";
 import { useSelector, useDispatch } from "react-redux";
 
-
 function AnimedoroCore({ logout }) {
   const [isActive, setActive] = useState(false);
   const [isPuased, setIsPuased] = useState(true);
@@ -18,11 +17,11 @@ function AnimedoroCore({ logout }) {
   const tasks = useSelector((state) => state);
 
   useEffect(() => {
-     dispatch(initializeTasks())
-  }, [dispatch])
+    dispatch(initializeTasks());
+  }, [dispatch]);
 
-  const data = JSON.parse(window.localStorage.getItem("loggedTaskAppUser"))
-  const userId = data["id"]
+  const data = JSON.parse(window.localStorage.getItem("loggedTaskAppUser"));
+  const userId = data["id"];
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -78,7 +77,17 @@ function AnimedoroCore({ logout }) {
         }
       }
     }, 1000);
-  }, [isActive, isPuased, seconds, session, minutes, isBreak, displayMessage, tasks, title]);
+  }, [
+    isActive,
+    isPuased,
+    seconds,
+    session,
+    minutes,
+    isBreak,
+    displayMessage,
+    tasks,
+    title,
+  ]);
 
   const handleStart = () => {
     setActive(true);
@@ -103,13 +112,19 @@ function AnimedoroCore({ logout }) {
   const addTask = async () => {
     dispatch(createTask(title, session, userId));
     setTitle("title");
-  }
+  };
 
   const formData = (event) => {
     event.preventDefault();
     const title = event.target.title.value;
+    const secs = event.target.seconds.value;
+    const minutes = event.target.minutes.value;
+    event.target.minutes.value = "";
+    event.target.seconds.value = "";
     event.target.title.value = "";
     setTitle(title);
+    setMinutes(minutes); 
+    setSeconds(secs);
   };
 
   return (
@@ -124,16 +139,27 @@ function AnimedoroCore({ logout }) {
               <button className="btn-small" onClick={() => setOpen(!open)}>
                 <span>...</span>
               </button>
-              <button className='logout-btn'  onClick={logout}>Log Out</button>
+              <button className="logout-btn" onClick={logout}>
+                Log Out
+              </button>
             </div>
-            <div style={{ transform: open ? "translateX(0px)" : "translateX(-15000px)" }}>
+            <div
+              style={{
+                transform: open ? "translateX(0px)" : "translateX(-15000px)",
+              }}
+            >
               <form onSubmit={formData}>
                 Title
                 <input name="title" />
-                <button className="button" type="submit">add</button>
+                <input name="minutes" type="number" />
+                <input name="seconds" type="number" />
+                <button className="button" type="submit">
+                  add
+                </button>
               </form>
             </div>
             <div className="Timer">
+            <p>Current Task: {title}</p>
               <h1>Animedoro </h1>
               <h1>
                 {timerMinutes}:{timerSeconds}
@@ -153,7 +179,7 @@ function AnimedoroCore({ logout }) {
           </div>
         </div>
         <div>
-          <ul >
+          <ul>
             {tasks.map((task) => (
               <li className="task" key={task.id}>
                 <p>{task.title}</p>
