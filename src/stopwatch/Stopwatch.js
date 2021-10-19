@@ -10,12 +10,7 @@ function Stopwatch() {
   const [isPaused, setIsPaused] = useState(true);
   const [lapTime, setLapTime] = useState(0);
   const [lapCounter, setLapCounter] = useState(1);
-  const [laps, setLaps] = useState([
-    {
-      LapNum: 1,
-      LapTime: 738478,
-    },
-  ]);
+  const [laps, setLaps] = useState([]);
 
   useEffect(() => {
     let interval = setInterval(() => {
