@@ -123,7 +123,7 @@ function AnimedoroCore({ logout }) {
     event.target.seconds.value = "";
     event.target.title.value = "";
     setTitle(title);
-    setMinutes(minutes); 
+    setMinutes(minutes);
     setSeconds(secs);
   };
 
@@ -159,7 +159,7 @@ function AnimedoroCore({ logout }) {
               </form>
             </div>
             <div className="Timer">
-            <p>Current Task: {title}</p>
+              <p>Current Task: {title}</p>
               <h1> Animedoro </h1>
               <h1>
                 {timerMinutes}:{timerSeconds}
@@ -180,12 +180,12 @@ function AnimedoroCore({ logout }) {
         </div>
         <div>
           <ul>
-            {tasks.map((task) => (
-              <li className="task" key={task.id}>
+              {tasks.filter(task => task.user.id === userId).map((task) => (
+                <li className="task" key={task.id}>
                 <p>{task.title}</p>
                 <p>{task.taskTime}</p>
               </li>
-            ))}
+              ))}
           </ul>
         </div>
       </div>
