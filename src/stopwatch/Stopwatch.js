@@ -73,17 +73,17 @@ function Stopwatch() {
           <h3>
             {timerMinutes}:{timerSeconds}
           </h3>
-          <div className="stop-btns">
-            <button className="stop-btn" onClick={startTimer}>
+          <div className="btns">
+            <button className="btn" onClick={startTimer}>
               Start
             </button>
-            <button className="stop-btn" onClick={addLap}>
+            <button className="btn" onClick={addLap}>
               Lap
             </button>
-            <button className="stop-btn" onClick={pauseTimer}>
+            <button className="btn" onClick={pauseTimer}>
               Pause
             </button>
-            <button className="stop-btn" onClick={resetTimer}>
+            <button className="btn" onClick={resetTimer}>
               Reset
             </button>
           </div>

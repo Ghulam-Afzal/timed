@@ -74,12 +74,14 @@ function Countdown() {
     <div>
       <Navbar />
       <div
-        style={{ transform: open ? "translateX(0px)" : "translateX(-15000px)" }}
+        style={{ transform: open ? "translateY(100px)" : "translateX(-15000px)" }}
       >
-        <form onSubmit={formData}>
-          <input name="minutes" type="number" />
-          <input name="seconds" type="number" />
-          <button type="submit">add</button>
+        <form className="form-conatianer" onSubmit={formData}>
+          <p >Minutes</p>
+          <input className="form-input" name="minutes" type="number" />
+          <p className="form-name">Seconds</p>
+          <input className="form-input" name="seconds" type="number" />
+          <button className="submit-btn" type="submit">add</button>
         </form>
       </div>
       <div className="Countdown-container">

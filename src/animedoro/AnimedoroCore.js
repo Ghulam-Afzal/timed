@@ -56,7 +56,7 @@ function AnimedoroCore({ logout }) {
           if (minutes === 0 && seconds === 0) {
             setActive(false);
             setIsPuased(true);
-            setMinutes(1);
+            setMinutes(2);
             setSeconds(0);
             setIsBreak(false);
           }
@@ -160,19 +160,19 @@ function AnimedoroCore({ logout }) {
             </div>
             <div className="Timer">
             <p>Current Task: {title}</p>
-              <h1>Animedoro </h1>
+              <h1> Animedoro </h1>
               <h1>
                 {timerMinutes}:{timerSeconds}
               </h1>
             </div>
-            <div className="buttons">
-              <button className="button" onClick={handleStart}>
+            <div className="btns">
+              <button className="btn" onClick={handleStart}>
                 Start
               </button>
-              <button className="button" onClick={handlePause}>
+              <button className="btn" onClick={handlePause}>
                 Pause
               </button>
-              <button className="button" onClick={handleReset}>
+              <button className="btn" onClick={handleReset}>
                 Stop
               </button>
             </div>

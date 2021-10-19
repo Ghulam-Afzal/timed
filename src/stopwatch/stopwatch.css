@@ -40,7 +40,7 @@
     transform: translateY(-5px);
 }
 
-.stop-btns {
+.btns {
     width: 350px; 
     height:25px; 
     display: flex;
@@ -53,7 +53,7 @@
     cursor: pointer;
 }
 
-.stop-btn {
+.btn {
     width: 100px; 
     height:25px; 
     margin: 5px; 
@@ -66,14 +66,19 @@
 }
 
 
+.btn:hover{
+    background-color: #5a74f2;
+    transform: transsition(backgound-color 350ms ease-in-out);
+}
+
 @media screen and (max-width: 356px) {
-    .stop-btns {
+    .btns {
         flex-direction: column;
         margin: 50px;
         height: 100px;
     }
     
-    .stop-btn {
+    .btn {
         height: 35px;
     }
 }
@@ -92,11 +97,11 @@
         max-width: 60vw;
     }
 
-    .stop-btns {
+    .btns {
         width: 1500px; 
     }
 
-    .stop-btn {
+    .btn {
         width: 150px; 
         height: 35px;
     }

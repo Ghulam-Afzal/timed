@@ -1,5 +1,6 @@
 import "./form.css";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import loginService from "../services/login";
 
 const LoginForm = ({ loginUser }) => {
@@ -51,6 +52,12 @@ const LoginForm = ({ loginUser }) => {
         <button className="submit-btn" type="submit">
           login
         </button>
+        <p>
+            Dont have a account?{" "}
+            <Link to="/signup" className="form-link">
+              <span>Sign Up</span>
+            </Link>
+          </p>
       </form>
     </div>
   );

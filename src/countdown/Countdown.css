@@ -23,28 +23,6 @@
     text-align: center;
 }
 
-
-.btns { 
-    width: 100px; 
-    height:25px; 
-    margin: 5px; 
-    border: none; 
-    border-radius: 5px;
-    color:white;  
-    cursor: pointer; 
-}
-
-.btn {
-    width: 100px; 
-    height:25px; 
-    margin: 5px; 
-    border: none; 
-    background-color: #4361ee;
-    border-radius: 5px;
-    color:white;  
-    cursor: pointer;   
-}
-
 .Countdown-main h3 { 
     font-size: 25px;
 }
