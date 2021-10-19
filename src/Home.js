@@ -49,7 +49,7 @@ function Home() {
                 <button className="home-btn home-btn-alt">Animedoro</button>
               </Link>
               <Link to="/signup">
-                <button className="home-btn home-btn-alt">signup</button>
+                <button className="home-btn home-btn-alt">Signup</button>
               </Link>
             </div>
             <img src={image3} alt="animedoro" className="image" />
