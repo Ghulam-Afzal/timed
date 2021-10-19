@@ -46,10 +46,10 @@ function Home() {
                 timer.
               </p>
               <Link to="/animedoro">
-                <button className="home-btn">Animedoro</button>
+                <button className="home-btn home-btn-alt">Animedoro</button>
               </Link>
               <Link to="/signup">
-                <button className="home-btn">signup</button>
+                <button className="home-btn home-btn-alt">signup</button>
               </Link>
             </div>
             <img src={image3} alt="animedoro" className="image" />

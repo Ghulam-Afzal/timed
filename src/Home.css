@@ -99,6 +99,20 @@
   opacity: 100%;
 }
 
+.home-btn-alt {
+  color: #000001;
+  background: #F5F5F5;
+
+}
+.home-btn-alt:hover{
+  background: #E8E8E8;
+}
+
+.home-btn-alt:active{
+  background: #E8E8E8;
+}
+
+
 @media screen and (min-width: 1200px) {
   .section .section-title {
     text-align: left;
