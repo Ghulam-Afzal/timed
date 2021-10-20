@@ -30,9 +30,9 @@ export const createTask = (title, time, id) => {
 
 
 
-export const initializeTasks = () => {
+export const initializeTasks = (user) => {
     return async dispatch => {
-        const tasks = await taskService.getAll()
+        const tasks = await taskService.getAll(user)
         dispatch({
             type: 'INIT_TASKS', 
             data: tasks, 

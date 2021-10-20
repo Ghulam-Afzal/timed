@@ -10,17 +10,19 @@ const setToken = newToken => {
 }
 
 
-const getAll = async () => { 
-    const response = await axios.get(baseUrl)
+const getAll = async (user) => { 
+    const config = {
+        headers: { authorization: token}
+    }
+    const object = {  user }
+    const response = await axios.post(baseUrl, object, config)
     return response.data
 }
 
 const createNew = async (title, taskTime, userId) => {
-    const config = {
-        headers: { authorization: token}
-    }
+    
     const object = { title, taskTime, userId }
-    const response = await axios.post(baseUrl, object, config)
+    const response = await axios.post(baseUrl, object)
     return response.data
 }
 

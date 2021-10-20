@@ -16,12 +16,15 @@ function AnimedoroCore({ logout }) {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state);
 
-  useEffect(() => {
-    dispatch(initializeTasks());
-  }, [dispatch]);
 
   const data = JSON.parse(window.localStorage.getItem("loggedTaskAppUser"));
   const userId = data["id"];
+
+
+  useEffect(() => {
+    dispatch(initializeTasks(userId));
+  }, [dispatch]);
+
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -180,7 +183,7 @@ function AnimedoroCore({ logout }) {
         </div>
         <div>
           <ul>
-              {tasks.filter(task => task.user.id === userId).map((task) => (
+              {tasks.map((task) => (
                 <li className="task" key={task.id}>
                 <p>{task.title}</p>
                 <p>{task.taskTime}</p>
