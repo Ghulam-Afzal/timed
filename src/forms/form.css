@@ -68,6 +68,8 @@ fieldset {
     font-weight: 800;
 }
 
+
+
 @media screen and (min-width: 500px) {
     form { 
         width: 60vw;

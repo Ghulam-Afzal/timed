@@ -2,6 +2,7 @@ import "./Countdown.css";
 import React, { useState, useEffect } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Navbar from "../navbar/Navbar";
+import Modal from '../components/Modal.js'; 
 
 function Countdown() {
   const [minutes, setMinutes] = useState(25);
@@ -68,27 +69,22 @@ function Countdown() {
   };
 
 
+  const close = () => {
+    setOpen(false); 
+  }
+
+
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
   return (
     <div>
       <Navbar />
-      <div
-        style={{ transform: open ? "translateY(100px)" : "translateX(-15000px)" }}
-      >
-        <form className="form-conatianer" onSubmit={formData}>
-          <p >Minutes</p>
-          <input className="form-input" name="minutes" type="number" />
-          <p className="form-name">Seconds</p>
-          <input className="form-input" name="seconds" type="number" />
-          <button className="submit-btn" type="submit">add</button>
-        </form>
-      </div>
       <div className="Countdown-container">
         <IoIosAddCircleOutline
           onClick={() => setOpen(!open)}
           className="burger"
         />
+        <Modal show={open} handleClose={close} formData={formData}/>
         <h1 className="Countdown-title">Countdown</h1>
         <div className="Countdown-main">
           <h3>
