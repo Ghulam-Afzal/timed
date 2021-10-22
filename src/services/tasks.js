@@ -10,19 +10,20 @@ const setToken = newToken => {
 }
 
 
-const getAll = async (user) => { 
-    const config = {
-        headers: { authorization: token}
-    }
-    const object = {  user }
-    const response = await axios.post(baseUrl, object, config)
+const getAll = async () => { 
+    const data = JSON.parse(window.localStorage.getItem("loggedTaskAppUser"));
+    const user = data["id"];
+    const object = { user }
+    const response = await axios.post('http://localhost:8080/api/tasks/gettasks', object)
     return response.data
 }
 
 const createNew = async (title, taskTime, userId) => {
-    
+    const config = {
+        headers: { authorization: token}
+    }
     const object = { title, taskTime, userId }
-    const response = await axios.post(baseUrl, object)
+    const response = await axios.post(baseUrl, object, config)
     return response.data
 }
 
