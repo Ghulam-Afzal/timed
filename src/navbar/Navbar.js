@@ -1,33 +1,35 @@
 import React, { useState } from "react";
-import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from "./NavStyles";
-
+import { Link } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
+import "./navbar.css";
 
 export default function Navbar(props) {
   const [open, setOpen] = useState(false);
 
+  const openNav = () => {};
+
   return (
     <div>
-      <Nav>
-        <NavLink to="/" activeStyle>
+      <nav className="Nav">
+        <Link className="nav-link" to="/">
           TIMED
-        </NavLink>
-        <Bars />
-        <NavMenu>
-          <NavLink to="/countdown" activeStyle>
+        </Link>
+        <FaBars className="nav-bars" onClick={() => setOpen(!open)} />
+        <div className="nav-menu" id={open ? "hidden" : ""}>
+          <Link className="nav-link" to="/countdown">
             Countdown
-          </NavLink>
-          <NavLink to="/animedoro" activeStyle>
+          </Link>
+          <Link className="nav-link" to="/animedoro">
             Animedoro
-          </NavLink>
-          <NavLink to="/stopwatch" activeStyle>
+          </Link>
+          <Link className="nav-link" to="/stopwatch">
             Stopwatch
-          </NavLink>
-          <NavLink to="/signup" activeStyle>
+          </Link>
+          <Link className="nav-link" to="/signup">
             Sign Up
-          </NavLink>
-        </NavMenu>
-      </Nav>
+          </Link>
+        </div>
+      </nav>
     </div>
-    
   );
 }
