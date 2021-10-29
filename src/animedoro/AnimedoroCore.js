@@ -2,6 +2,8 @@ import "./Animedoro.css";
 import React, { useState, useEffect } from "react";
 import { createTask, initializeTasks } from "./taskReducer";
 import { useSelector, useDispatch } from "react-redux";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { AiOutlineClose } from "react-icons/ai";
 
 function AnimedoroCore({ logout }) {
   const [isActive, setActive] = useState(false);
@@ -9,22 +11,19 @@ function AnimedoroCore({ logout }) {
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(0);
   const [session, setSession] = useState(1);
-  const [isBreak, setIsBreak] = useState(false);
+  const [isBreak, setIsBreak] = useState(true);
   const [displayMessage, setDisplayMessage] = useState(false);
   const [title, setTitle] = useState("No title specified ");
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state);
 
-
   const data = JSON.parse(window.localStorage.getItem("loggedTaskAppUser"));
   const userId = data["id"];
 
-
   useEffect(() => {
-    dispatch(initializeTasks(userId));
+    dispatch(initializeTasks());
   }, [dispatch]);
-
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -117,7 +116,7 @@ function AnimedoroCore({ logout }) {
     setTitle("title");
   };
 
-  const formData = (event) => {
+  const submitFormData = (event) => {
     event.preventDefault();
     const title = event.target.title.value;
     const secs = event.target.seconds.value;
@@ -125,43 +124,64 @@ function AnimedoroCore({ logout }) {
     event.target.minutes.value = "";
     event.target.seconds.value = "";
     event.target.title.value = "";
+    console.log(title);
+    console.log(secs);
+    console.log(minutes);
     setTitle(title);
     setMinutes(minutes);
     setSeconds(secs);
+    handleClose(); 
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const AModal = () => {
+    const showHideClassName = open
+      ? "modal display-block"
+      : "modal display-none";
+
+    return (
+      <div className={showHideClassName}>
+        <section className="modal-main">
+        <AiOutlineClose className="close-btn" onClick={handleClose} />
+          <form onSubmit={submitFormData}>
+          <p className="form-name">Title of the task</p>
+            <input className="form-input" name="title" />
+            <p className="form-name">Minutes</p>
+            <input className="form-input" name="minutes" type="number" min="0" max="60"/>
+            <p className="form-name">Seconds</p>
+            <input className="form-input" name="seconds" type="number" min="0" max="60"/>
+            <button className="submit-btn" type="submit" >
+              Submit
+            </button>
+          </form>
+          </section>
+        </div>
+    );
   };
 
   return (
     <div>
       <div className="is">
+        <AModal/>
         <div className="Pomodoro">
-          <div>
-            <div className="message">
-              {displayMessage && <div>Break Time! New session starts in:</div>}
-            </div>
-            <div className="btn-small-cont">
-              <button className="btn-small" onClick={() => setOpen(!open)}>
-                <span>...</span>
-              </button>
-              <button className="logout-btn" onClick={logout}>
-                Log Out
-              </button>
-            </div>
-            <div
-              style={{
-                transform: open ? "translateX(0px)" : "translateX(-15000px)",
-              }}
-            >
-              <form onSubmit={formData}>
-                Title
-                <input name="title" />
-                <input name="minutes" type="number" />
-                <input name="seconds" type="number" />
-                <button className="button" type="submit">
-                  add
+          <div className="message">
+            {displayMessage && <div>Break Time! New session starts in:</div>}
+          </div>
+          <div className="Timer">
+            <div>
+              <div className="a-btns">
+                <IoIosAddCircleOutline
+                  onClick={() => setOpen(!open)}
+                  className="burger"
+                />
+
+                <button className="logout-btn" onClick={logout}>
+                  Log Out
                 </button>
-              </form>
-            </div>
-            <div className="Timer">
+              </div>
               <p>Current Task: {title}</p>
               <h1> Animedoro </h1>
               <h1>
@@ -183,12 +203,12 @@ function AnimedoroCore({ logout }) {
         </div>
         <div>
           <ul>
-              {tasks.map((task) => (
-                <li className="task" key={task.id}>
+            {tasks.map((task) => (
+              <li className="task" key={task.id}>
                 <p>{task.title}</p>
                 <p>{task.taskTime}</p>
               </li>
-              ))}
+            ))}
           </ul>
         </div>
       </div>
