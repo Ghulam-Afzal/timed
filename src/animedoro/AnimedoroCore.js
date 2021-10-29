@@ -7,12 +7,10 @@ import { AiOutlineClose } from "react-icons/ai";
 
 function AnimedoroCore({ logout }) {
   const [isActive, setActive] = useState(false);
-  const [isPuased, setIsPuased] = useState(true);
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(0);
   const [session, setSession] = useState(1);
-  const [isBreak, setIsBreak] = useState(true);
-  const [displayMessage, setDisplayMessage] = useState(false);
+  const [isBreak, setIsBreak] = useState(false);
   const [title, setTitle] = useState("No title specified ");
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -28,84 +26,51 @@ function AnimedoroCore({ logout }) {
   useEffect(() => {
     let interval = setInterval(() => {
       clearInterval(interval);
-
-      if (isActive && !isPuased) {
-        if (!isBreak) {
-          if (minutes === 0 && seconds === 0) {
-            setActive(false);
-            setIsPuased(true);
-            setMinutes(1);
-            setSeconds(0);
-            setIsBreak(true);
+      
+      if(isActive){
+        if (seconds === 0){
+          if (minutes !== 0){
+            setSeconds(59)
+            setMinutes(minutes - 1)
+          }else {
+            let minutes = isBreak ? minutes : 5
+            let seconds = 0
+            setSeconds(seconds)
+            setMinutes(minutes)
+            setActive(false)
+            setIsBreak(!isBreak);
           }
-          if (seconds === 0 && !isPuased) {
-            if (minutes !== 0) {
-              setSeconds(59);
-              setMinutes(minutes - 1);
-            } else {
-              let seconds = 59;
-
-              setSeconds(seconds);
-              setMinutes(minutes);
-              setDisplayMessage(!displayMessage);
-            }
-          } else {
-            setSeconds(seconds - 1);
-            setSession(session + 1);
-          }
-        }
-        if (isBreak) {
-          if (minutes === 0 && seconds === 0) {
-            setActive(false);
-            setIsPuased(true);
-            setMinutes(2);
-            setSeconds(0);
-            setIsBreak(false);
-          }
-          if (seconds === 0 && !isPuased) {
-            if (minutes !== 0) {
-              setSeconds(59);
-              setMinutes(minutes - 1);
-            } else {
-              let seconds = 59;
-
-              setSeconds(seconds);
-              setMinutes(minutes);
-              setDisplayMessage(!displayMessage);
-            }
-          } else {
-            setSeconds(seconds - 1);
+        }else {
+          setSeconds(seconds - 1)
+          if (!isBreak){
+            setSession(session + 1)
           }
         }
       }
     }, 1000);
-  }, [
-    isActive,
-    isPuased,
-    seconds,
-    session,
-    minutes,
-    isBreak,
-    displayMessage,
-    tasks,
-    title,
-  ]);
+  }, [isActive, seconds, session, minutes, isBreak]);
 
   const handleStart = () => {
     setActive(true);
-    setIsPuased(false);
   };
 
   const handlePause = () => {
-    setIsPuased(true);
+    setActive(false);
   };
 
   const handleReset = () => {
-    setIsPuased(true);
     setActive(false);
     addTask();
-    console.log(`isPuased: ${isPuased}`);
-    console.log(isActive);
+    if (isBreak){
+      setMinutes(25)
+      setSeconds(59)
+      setIsBreak(!isBreak)
+    }else {
+      setMinutes(25)
+      setSeconds(39)
+    }
+    console.log(isBreak)
+    
   };
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
@@ -124,9 +89,6 @@ function AnimedoroCore({ logout }) {
     event.target.minutes.value = "";
     event.target.seconds.value = "";
     event.target.title.value = "";
-    console.log(title);
-    console.log(secs);
-    console.log(minutes);
     setTitle(title);
     setMinutes(minutes);
     setSeconds(secs);
@@ -138,9 +100,7 @@ function AnimedoroCore({ logout }) {
   };
 
   const AModal = () => {
-    const showHideClassName = open
-      ? "modal display-block"
-      : "modal display-none";
+    const showHideClassName = open ? "modal display-block" : "modal display-none";
 
     return (
       <div className={showHideClassName}>
@@ -167,9 +127,6 @@ function AnimedoroCore({ logout }) {
       <div className="is">
         <AModal/>
         <div className="Pomodoro">
-          <div className="message">
-            {displayMessage && <div>Break Time! New session starts in:</div>}
-          </div>
           <div className="Timer">
             <div>
               <div className="a-btns">
@@ -177,7 +134,6 @@ function AnimedoroCore({ logout }) {
                   onClick={() => setOpen(!open)}
                   className="burger"
                 />
-
                 <button className="logout-btn" onClick={logout}>
                   Log Out
                 </button>
