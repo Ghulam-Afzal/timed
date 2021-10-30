@@ -14,14 +14,14 @@ const taskReducer = (state = [], action) => {
   };
   
 
-export const createTask = (title, time, id) => {
+export const createTask = (title, taskTime, id) => {
     return async dispatch => {
-        const newTask = await taskService.createNew(title, time, id)
+        const newTask = await taskService.createNew(title, taskTime, id)
         dispatch({
             type:'NEW_TASK', 
             data: { 
                 title, 
-                time, 
+                taskTime, 
                 id,
             }
         })
