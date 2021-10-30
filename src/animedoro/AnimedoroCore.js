@@ -11,6 +11,8 @@ function AnimedoroCore({ logout }) {
   const [seconds, setSeconds] = useState(0);
   const [session, setSession] = useState(1);
   const [isBreak, setIsBreak] = useState(false);
+  const [formMinutes, setFormMinutes] = useState(1);
+  const [formSeconds, setFormSeconds] = useState(0);
   const [title, setTitle] = useState("No title specified ");
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -28,12 +30,15 @@ function AnimedoroCore({ logout }) {
       clearInterval(interval);
       
       if(isActive){
+        if (seconds === 0 && minutes === 0){
+          setActive(false)
+        }
         if (seconds === 0){
           if (minutes !== 0){
             setSeconds(59)
             setMinutes(minutes - 1)
           }else {
-            let minutes = isBreak ? minutes : 5
+            let minutes = isBreak ? formMinutes : 2
             let seconds = 0
             setSeconds(seconds)
             setMinutes(minutes)
@@ -90,6 +95,8 @@ function AnimedoroCore({ logout }) {
     event.target.seconds.value = "";
     event.target.title.value = "";
     setTitle(title);
+    setFormMinutes(minutes);
+    setFormSeconds(secs);
     setMinutes(minutes);
     setSeconds(secs);
     handleClose(); 
