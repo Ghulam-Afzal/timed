@@ -12,9 +12,11 @@ function Stopwatch() {
   const [lapCounter, setLapCounter] = useState(1);
   const [laps, setLaps] = useState([]);
 
+  let interval;
   useEffect(() => {
-    let interval = setInterval(() => {
+      interval = setInterval(() => {
       clearInterval(interval);
+      console.log(`interval in useeffect: ${interval}`)
 
       if (isActive && !isPaused) {
         if (seconds === 59) {
@@ -26,7 +28,8 @@ function Stopwatch() {
         }
       }
     }, 1000);
-  }, [isActive, isPaused, seconds, minutes, lapTime]);
+    return () => clearInterval(interval);
+  }, [isActive, isPaused, seconds, lapTime]);
 
   const startTimer = () => {
     setIsActive(true);
@@ -38,12 +41,15 @@ function Stopwatch() {
   };
 
   const resetTimer = () => {
-    setIsActive(false);
-    setIsPaused(true);
-    setSeconds(0);
-    setMinutes(0);
-    setLapTime(0);
+    clearInterval(interval);
+    console.log(`resseting interval in reset: ${interval}`)
+    setIsActive(false)
+    setIsPaused(true)
+    setSeconds(0)
+    setMinutes(0)
+    setLapTime(0)
     setLaps([])
+
   };
 
   const addLap = () => {
