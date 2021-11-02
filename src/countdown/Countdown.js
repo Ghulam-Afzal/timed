@@ -13,32 +13,30 @@ function Countdown() {
   const [formSeconds, setFormSeconds] = useState(0);
   const [open, setOpen] = useState(false);
 
+  let interval;
   useEffect(() => {
-    let interval = setInterval(() => {
+      interval = setInterval(() => {
       clearInterval(interval);
-
+      console.log(`interval in ruseeffect: ${interval}`)
       if (isActive && !isPaused) {
         if (minutes === 0 && seconds === 0) {
           setIsActive(false);
           setIsPaused(true);
-          setMinutes(formMinutes);
-          setSeconds(formSeconds);
         }
         if (seconds === 0 && !isPaused) {
           if (minutes !== 0) {
             setSeconds(59);
             setMinutes(minutes - 1);
           } else {
-            let seconds = 59;
-            setSeconds(seconds);
-            setMinutes(minutes);
+            setSeconds(formSeconds);
+            setMinutes(formMinutes);
           }
         } else {
-          setSeconds(seconds - 1);
+            setSeconds(seconds - 1);      
         }
       }
     }, 1000);
-  }, [isActive, isPaused, seconds, minutes, formMinutes, formSeconds]);
+  }, [isActive, isPaused, seconds]);
 
   const startTimer = () => {
     setIsActive(true);
@@ -50,10 +48,13 @@ function Countdown() {
   };
 
   const resetTimer = () => {
+    // this clear interval has cuased me so much pain
+    clearInterval(interval);
+    console.log(`resseting interval in reset: ${interval}`)
     setIsActive(false);
     setIsPaused(true);
-    setSeconds(0);
-    setMinutes(25);
+    setSeconds(formSeconds);
+    setMinutes(formMinutes);
   };
 
   const formData = (event) => {
