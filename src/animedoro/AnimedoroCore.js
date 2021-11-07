@@ -7,11 +7,11 @@ import { AiOutlineClose } from "react-icons/ai";
 
 function AnimedoroCore({ logout }) {
   const [isActive, setActive] = useState(false);
-  const [minutes, setMinutes] = useState(1);
+  const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
   const [session, setSession] = useState(1);
   const [isBreak, setIsBreak] = useState(false);
-  const [formMinutes, setFormMinutes] = useState(1);
+  const [formMinutes, setFormMinutes] = useState(25);
   const [formSeconds, setFormSeconds] = useState(0);
   const [title, setTitle] = useState("No title specified ");
   const [open, setOpen] = useState(false);
@@ -38,12 +38,18 @@ function AnimedoroCore({ logout }) {
           if (minutes !== 0){
             setSeconds(59)
             setMinutes(minutes - 1)
-          }else {
-            let minutes = isBreak ? formMinutes : 2
+          }else { 
+            let minutes = isBreak ? formMinutes : formMinutes / 5
             let seconds = 0
             setSeconds(seconds)
             setMinutes(minutes)
             setIsBreak(!isBreak);
+            if (!isBreak){
+              addTask()
+            }
+            else {
+              setSession(0)
+            }
           }
         }else {
           setSeconds(seconds - 1)
