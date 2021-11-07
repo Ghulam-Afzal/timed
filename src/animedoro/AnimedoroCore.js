@@ -25,8 +25,9 @@ function AnimedoroCore({ logout }) {
     dispatch(initializeTasks());
   }, [dispatch]);
 
+  let interval;
   useEffect(() => {
-    let interval = setInterval(() => {
+    interval = setInterval(() => {
       clearInterval(interval);
       
       if(isActive){
@@ -42,7 +43,6 @@ function AnimedoroCore({ logout }) {
             let seconds = 0
             setSeconds(seconds)
             setMinutes(minutes)
-            setActive(false)
             setIsBreak(!isBreak);
           }
         }else {
@@ -53,6 +53,7 @@ function AnimedoroCore({ logout }) {
         }
       }
     }, 1000);
+    return () => clearInterval(interval)
   }, [isActive, seconds, session, minutes, isBreak]);
 
   const handleStart = () => {
@@ -64,18 +65,19 @@ function AnimedoroCore({ logout }) {
   };
 
   const handleReset = () => {
+    clearInterval(interval);
     setActive(false);
     addTask();
     if (isBreak){
-      setMinutes(25)
-      setSeconds(59)
+      setMinutes(formMinutes)
+      setSeconds(formSeconds)
       setIsBreak(!isBreak)
     }else {
-      setMinutes(25)
-      setSeconds(39)
+      setActive(false)
+      setMinutes(formMinutes)
+      setSeconds(formSeconds)
     }
     console.log(isBreak)
-    
   };
 
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
@@ -146,6 +148,7 @@ function AnimedoroCore({ logout }) {
                 </button>
               </div>
               <p>Current Task: {title}</p>
+              <p> Make sure to stop the timer when you want to record the time for the task</p>
               <h1> Animedoro </h1>
               <h1>
                 {timerMinutes}:{timerSeconds}
