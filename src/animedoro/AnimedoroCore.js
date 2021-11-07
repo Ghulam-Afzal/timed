@@ -167,7 +167,7 @@ function AnimedoroCore({ logout }) {
                 </button>
               </div>
               <p>Current Task: {title}</p>
-              <p> Make sure to stop the timer when you want to record the time for the task</p>
+              <p> The stop button will add a task and reset the timer.</p>
               <h1> Animedoro </h1>
               <h1>
                 {timerMinutes}:{timerSeconds}
