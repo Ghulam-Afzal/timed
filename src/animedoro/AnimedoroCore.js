@@ -108,6 +108,19 @@ function AnimedoroCore({ logout }) {
     setOpen(false);
   };
 
+  const computeTime = (time) => {
+    let hour = Math.floor(time / 3600)
+    let min = Math.floor((time - (time / 3600)) / 60)
+    let secs = time - (hour * 3600) - (min * 60)
+
+    if (hour   < 10) {hour   = "0"+ hour;}
+    if (min < 10) {min = "0" + min;}
+    if (secs < 10) {secs = "0" + secs;}
+
+    return hour + ':' + min + ':' + secs
+  }
+
+
   const AModal = () => {
     const showHideClassName = open ? "modal display-block" : "modal display-none";
 
@@ -172,7 +185,7 @@ function AnimedoroCore({ logout }) {
             {tasks.map((task) => (
               <li className="task" key={task.id}>
                 <p>{task.title}</p>
-                <p>{task.taskTime}</p>
+                <p>{computeTime(task.taskTime)}</p>
               </li>
             ))}
           </ul>
